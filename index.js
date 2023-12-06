@@ -1,7 +1,10 @@
+import calculate from "./calc.js"
+import copyToClipboard from "./clipboard.js"
+
 const main = document.querySelector("main")
 const root = document.querySelector(":root")
 const input = document.getElementById("input")
-const resultInput = document.getElementById("result")
+// const resultInput = document.getElementById("result")
 
 const allowedKeys = ["(", ")", "/", "*", "-", "+", "9", "8", "7", "6", "5", "4", "3", "2", "1", "0", ".", "%", " "] // AQUI SELECIONAMOS OS CARACTERES PERMITIDOS. 
 
@@ -33,25 +36,7 @@ input.addEventListener("keydown", function (ev) {
 
 document.getElementById("equal").addEventListener("click", calculate) // ADICIONANDO A OPÇÃO DE CALCULAR TAMBEM 
 
-function calculate() {
-  resultInput.value = "ERROR"
-  resultInput.classList.add("error")
-  const result = eval(input.value)   // eval() ----> SE TRATA DE UMA FUNÇÃO GLOBAL QUE RECEBE UMA STRING COMO ARGUMENTO E A INTERPRETA E EXECUTA COMO UM CODIGO JS 
-  resultInput.value = result
-  resultInput.classList.remove("error")
-}
-
-document.getElementById("copyToClipboard").addEventListener("click", function (ev) {  // FUNCIONALIDADE PARA COPIAR O RESULTADO PARA AREA DE TRANSFEREENCIA. 
-  const button = ev.currentTarget
-  if (button.innerText === "Copiar") {
-    button.innerText = "Copiado!"
-    button.classList.add("success")
-    navigator.clipboard.writeText(resultInput.value)
-  } else {
-    button.innerText = "Copiar"
-    button.classList.remove("success")
-  }
-})
+document.getElementById("copyToClipboard").addEventListener("click", copyToClipboard)
 
 document.getElementById("themeSwitcher").addEventListener("click", function () {  // FUNCIONALIDADE DE TROCA DE TEMAS 
   if (main.dataset.theme === "dark") {
